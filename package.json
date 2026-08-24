@@ -1,5 +1,5 @@
 {
-  "name": "mcp-compat",
+  "name": "@a5omic/mcp-compat",
   "version": "0.1.0",
   "description": "Dual-era compatibility primitives and diagnostics for legacy and stateless MCP.",
   "keywords": [

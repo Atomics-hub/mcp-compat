@@ -1,15 +1,15 @@
 # mcp-compat
 
-[![npm version](https://img.shields.io/npm/v/mcp-compat)](https://www.npmjs.com/package/mcp-compat)
+[![npm version](https://img.shields.io/npm/v/%40a5omic%2Fmcp-compat)](https://www.npmjs.com/package/@a5omic/mcp-compat)
 [![CI](https://github.com/Atomics-hub/mcp-compat/actions/workflows/ci.yml/badge.svg)](https://github.com/Atomics-hub/mcp-compat/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/mcp-compat)](LICENSE)
+[![license](https://img.shields.io/npm/l/%40a5omic%2Fmcp-compat)](LICENSE)
 
 Dual-era compatibility primitives and diagnostics for the Model Context Protocol.
 
 `mcp-compat` helps libraries, gateways, clients, and servers handle the boundary between handshake-era MCP (`2025-11-25` and earlier) and stateless MCP (`2026-07-28`). The core has **zero runtime dependencies** and does not import either generation of the official SDK.
 
 ```bash
-npm install mcp-compat
+npm install @a5omic/mcp-compat
 ```
 
 ```ts
@@ -17,7 +17,7 @@ import {
   detectMcpEra,
   negotiateProtocolVersion,
   withModernMeta,
-} from "mcp-compat";
+} from "@a5omic/mcp-compat";
 
 const request = withModernMeta({
   jsonrpc: "2.0",
@@ -32,8 +32,8 @@ negotiateProtocolVersion(["2026-07-28", "2025-11-25"]); // "2026-07-28"
 It also ships a safe, CI-friendly CLI:
 
 ```bash
-npx mcp-compat probe https://example.com/mcp
-npx mcp-compat audit transcript.json --strict
+npx @a5omic/mcp-compat probe https://example.com/mcp
+npx @a5omic/mcp-compat audit transcript.json --strict
 ```
 
 ## Why this exists
@@ -63,7 +63,7 @@ Protocol references:
 ### Detect a protocol era
 
 ```ts
-import { detectMcpEra } from "mcp-compat";
+import { detectMcpEra } from "@a5omic/mcp-compat";
 
 const detection = detectMcpEra(message, {
   "MCP-Protocol-Version": "2026-07-28",
@@ -85,7 +85,7 @@ Conflicting signals return `era: "unknown"` with explicit issues. Unknown future
 ### Add modern per-request metadata
 
 ```ts
-import { withModernMeta } from "mcp-compat";
+import { withModernMeta } from "@a5omic/mcp-compat";
 
 const modern = withModernMeta(
   {
@@ -110,7 +110,7 @@ Existing vendor metadata is preserved. The input object is never mutated.
 ### Mirror modern HTTP routing headers
 
 ```ts
-import { normalizeMcpHeaders } from "mcp-compat";
+import { normalizeMcpHeaders } from "@a5omic/mcp-compat";
 
 normalizeMcpHeaders(modern);
 // {
@@ -128,7 +128,7 @@ Values that are not safe plain-ASCII header values are encoded using MCP's Base6
 ### Negotiate supported revisions
 
 ```ts
-import { negotiateProtocolVersion } from "mcp-compat";
+import { negotiateProtocolVersion } from "@a5omic/mcp-compat";
 
 negotiateProtocolVersion(["2025-11-25", "2026-07-28"]);
 // "2026-07-28"
@@ -142,7 +142,7 @@ The local list determines preference order. No lexical date comparison is used.
 ### Build a conforming unsupported-version error
 
 ```ts
-import { createUnsupportedProtocolError } from "mcp-compat";
+import { createUnsupportedProtocolError } from "@a5omic/mcp-compat";
 
 createUnsupportedProtocolError(7, "2028-01-01");
 // JSON-RPC error -32022 with requested and supported revisions
@@ -151,7 +151,7 @@ createUnsupportedProtocolError(7, "2028-01-01");
 ### Classify endpoint compatibility
 
 ```ts
-import { classifyCompatibility } from "mcp-compat";
+import { classifyCompatibility } from "@a5omic/mcp-compat";
 
 classifyCompatibility("legacy", "modern").status; // "incompatible"
 classifyCompatibility("modern", "dual").status; // "compatible"
@@ -161,7 +161,7 @@ classifyCompatibility("legacy", "legacy").status; // "compatible"
 ## Audit messages and transcripts
 
 ```ts
-import { auditMcpMessage, auditMcpTranscript } from "mcp-compat";
+import { auditMcpMessage, auditMcpTranscript } from "@a5omic/mcp-compat";
 
 const report = auditMcpMessage(message, headers);
 const transcript = auditMcpTranscript([
@@ -185,7 +185,7 @@ Findings have stable codes, severities, messages, and JSON paths. Current checks
 ## Probe live endpoints
 
 ```ts
-import { probeMcpEndpoint } from "mcp-compat";
+import { probeMcpEndpoint } from "@a5omic/mcp-compat";
 
 const report = await probeMcpEndpoint("https://example.com/mcp", {
   timeoutMs: 5_000,
