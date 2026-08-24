@@ -1,0 +1,35 @@
+name: Bug report
+description: Report reproducible incorrect behavior in mcp-compat
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve mcp-compat. Please remove secrets from all examples.
+  - type: input
+    id: version
+    attributes:
+      label: mcp-compat version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include the smallest message, headers, or endpoint behavior that reproduces the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime
+      placeholder: Node.js 22 on macOS
+    validations:
+      required: true

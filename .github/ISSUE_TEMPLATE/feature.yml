@@ -1,0 +1,25 @@
+name: Feature request
+description: Propose a focused MCP compatibility capability
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Compatibility problem
+      description: What concrete integration or migration problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: protocol
+    attributes:
+      label: Protocol evidence
+      description: Link the relevant official specification or SDK behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API or behavior
+    validations:
+      required: true

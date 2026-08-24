@@ -1,0 +1,91 @@
+{
+  "name": "mcp-compat",
+  "version": "0.1.0",
+  "description": "Dual-era compatibility primitives and diagnostics for legacy and stateless MCP.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "compatibility",
+    "migration",
+    "protocol",
+    "json-rpc",
+    "ai",
+    "typescript"
+  ],
+  "type": "module",
+  "license": "MIT",
+  "author": "Atomics Hub",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Atomics-hub/mcp-compat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Atomics-hub/mcp-compat/issues"
+  },
+  "homepage": "https://github.com/Atomics-hub/mcp-compat#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@11.6.0",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "mcp-compat": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:package": "node scripts/verify-package.mjs",
+    "lint": "eslint .",
+    "lint:package": "node scripts/lint-package.mjs",
+    "format:check": "prettier --check .",
+    "pack:check": "npm pack --dry-run --cache .npm-cache",
+    "release:check": "node scripts/check-release.mjs",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run lint:package && npm run test:package && npm run pack:check",
+    "prepublishOnly": "npm run verify"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.2.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "eslint": "^10.9.0",
+    "fast-check": "^4.3.0",
+    "prettier": "^3.6.2",
+    "publint": "^0.3.24",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.67.0",
+    "vitest": "^4.1.11"
+  }
+}
